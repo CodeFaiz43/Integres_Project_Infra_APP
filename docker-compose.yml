@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: ./app/backend
+    container_name: backend-service
+    ports:
+      - "8082:8080"
+    environment:
+      - ENV=local
+
+  frontend:
+    build: ./app/frontend
+    container_name: frontend-service
+    ports:
+      - "8083:8080"
+    environment:
+      - BACKEND_URL=http://backend:8080
+      - ENV=local
+    depends_on:
+      - backend
